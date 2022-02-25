@@ -48,16 +48,16 @@ def appendSpherical_np(xyz):
     to numpy array of cartesian coordinates
     By: mtrw
     """
-    ptsnew = np.hstack((xyz, np.zeros(xyz.shape)))
-    xy = xyz[:,0]**2 + xyz[:,1]**2
-    ptsnew[:,3] = np.sqrt(xy + xyz[:,2]**2)
-    ptsnew[:,4] = np.arctan2(np.sqrt(xy), xyz[:,2]) # for elevation angle defined from Z-axis down
+    ptsnew=np.hstack((xyz, np.zeros(xyz.shape)))
+    xy=xyz[:,0]**2 + xyz[:,1]**2
+    ptsnew[:,3]=np.sqrt(xy + xyz[:,2]**2)
+    ptsnew[:,4]=np.arctan2(np.sqrt(xy), xyz[:,2]) # for elevation angle defined from Z-axis down
     #ptsnew[:,4] = np.arctan2(xyz[:,2], np.sqrt(xy)) # for elevation angle defined from XY-plane up
-    ptsnew[:,5] = np.arctan2(xyz[:,1], xyz[:,0])
+    ptsnew[:,5]=np.arctan2(xyz[:,1], xyz[:,0])
     return ptsnew
 
-def vizData(df, markersize = 2, opacity = 0.5):
-    fig = go.Figure(data=[go.Scatter3d(
+def vizData(df, markersize=2, opacity=0.5):
+    fig=go.Figure(data=[go.Scatter3d(
     x=df["x"],
     y=df["y"],
     z=df["z"],
@@ -80,13 +80,13 @@ def generateData(nData, low, high):
     #Add spherical coordinates
     data = appendSpherical_np(data)
     #Convert to Pandas DataFrame
-    df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+    df = pd.DataFrame(data, columns= ["x", "y", "z", "r", "theta", "phi"])
     return df
 
 
 
 
-
+#Examples
 
 
 
@@ -111,7 +111,9 @@ df = generateData(nData = Ndata, low = low, high = high)
 
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = n, m = m, l = l, 
-                                     r = x["r"], theta = x["theta"], phi=x["phi"])  )
+                                     r = x["r"], 
+                                     theta = x["theta"], 
+                                     phi= x["phi"])  )
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
@@ -140,7 +142,9 @@ df = generateData(nData = Ndata, low = -50, high = 50)
 
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 1, 
-                                     r = x["r"], theta = x["theta"], phi=x["phi"])  )
+                                     r = x["r"], 
+                                     theta = x["theta"], 
+                                     phi = x["phi"])  )
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.02]
@@ -170,7 +174,9 @@ df = generateData(nData = Ndata, low = low, high = high)
 
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 3, 
-                                     r = x["r"], theta = x["theta"], phi=x["phi"])  )
+                                     r = x["r"], 
+                                     theta = x["theta"], 
+                                     phi = x["phi"])  )
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
@@ -200,7 +206,9 @@ df = generateData(nData = Ndata, low = low, high = high)
 
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 2, 
-                                     r = x["r"], theta = x["theta"], phi=x["phi"])  )
+                                     r = x["r"], 
+                                     theta = x["theta"], 
+                                     phi = x["phi"])  )
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
@@ -230,13 +238,12 @@ df = generateData(nData = Ndata, low = low, high = high)
 
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 5, m = 1, l = 3, 
-                                     r = x["r"], theta = x["theta"], phi=x["phi"])  )
+                                     r = x["r"], 
+                                     theta = x["theta"], 
+                                     phi = x["phi"])  )
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.008]
 
 #Plot data
 vizData(subdf)
-
-
-
