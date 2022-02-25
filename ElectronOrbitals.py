@@ -35,7 +35,7 @@ def hwave(n, m, l, r, theta, phi):
     #Define variables
     rho = (2*r)/(n*a0star)
     root = np.sqrt( ( ( (2)/(a0star) )**3 )*( (np.math.factorial(n-l-1))/(2*n*(np.math.factorial(n+l) ) ) ) )
-    e = np.exp(-rho/2)
+    e = np.exp(-rho/2)*rho**l
     #General laguare poly
     L = genlaguerre(n-l-1,2*l+1)(rho)
     #Spherical harmonic
@@ -67,7 +67,7 @@ def appendSpherical_np(xyz):
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-10, high=10, size=(Ndata,3))
+data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -86,7 +86,7 @@ fig = go.Figure(data=[go.Scatter3d(
     z=subdf["z"],
     mode='markers',
     marker=dict(
-        size=1.5,
+        size=2,
         color=subdf["wav"],                # set color to an array/list of desired values
         colorscale='plasma',   # choose a colorscale
         opacity=0.3
@@ -107,7 +107,7 @@ fig.show()
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
+data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -117,8 +117,7 @@ df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 1,
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
 #Subset data
 subdf = df.copy()
-subdf = subdf.loc[subdf["wav"].abs()>0.003]
-
+subdf = subdf.loc[subdf["wav"].abs()>0.02]
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
     x=subdf["x"],
@@ -126,10 +125,10 @@ fig = go.Figure(data=[go.Scatter3d(
     z=subdf["z"],
     mode='markers',
     marker=dict(
-        size=1.5,
+        size=2,
         color=subdf["wav"],                # set color to an array/list of desired values
         colorscale='plasma',   # choose a colorscale
-        opacity=0.3
+        opacity=0.5
     )
 )])
 
@@ -147,7 +146,7 @@ fig.show()
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-15, high=15, size=(Ndata,3))
+data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -157,7 +156,7 @@ df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 3,
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
 #Subset data
 subdf = df.copy()
-subdf = subdf.loc[subdf["wav"].abs()>0.0001]
+subdf = subdf.loc[subdf["wav"].abs()>0.01]
 
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
@@ -166,10 +165,10 @@ fig = go.Figure(data=[go.Scatter3d(
     z=subdf["z"],
     mode='markers',
     marker=dict(
-        size=1.5,
+        size=2,
         color=subdf["wav"],                # set color to an array/list of desired values
         colorscale='plasma',   # choose a colorscale
-        opacity=0.3
+        opacity=0.5
     )
 )])
 
@@ -187,7 +186,7 @@ fig.show()
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
+data = np.random.uniform(low=-35, high=35, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -197,7 +196,7 @@ df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 2,
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
 #Subset data
 subdf = df.copy()
-subdf = subdf.loc[subdf["wav"].abs()>0.0001]
+subdf = subdf.loc[subdf["wav"].abs()>0.01]
 
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
@@ -206,10 +205,10 @@ fig = go.Figure(data=[go.Scatter3d(
     z=subdf["z"],
     mode='markers',
     marker=dict(
-        size=1.5,
+        size=2,
         color=subdf["wav"],                # set color to an array/list of desired values
         colorscale='plasma',   # choose a colorscale
-        opacity=0.3
+        opacity=0.5
     )
 )])
 
@@ -227,17 +226,17 @@ fig.show()
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-20, high=20, size=(Ndata,3))
+data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
 df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
 #Calculate Electron density
-df = df.assign(wav = lambda x: hwave(n = 3, m = 0, l = 1, 
+df = df.assign(wav = lambda x: hwave(n = 5, m = 1, l = 3, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
 #Subset data
 subdf = df.copy()
-subdf = subdf.loc[subdf["wav"].abs()>0.005]
+subdf = subdf.loc[subdf["wav"].abs()>0.008]
 
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
@@ -246,10 +245,10 @@ fig = go.Figure(data=[go.Scatter3d(
     z=subdf["z"],
     mode='markers',
     marker=dict(
-        size=1.5,
+        size=2,
         color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='BlueRed',   # choose a colorscale
-        opacity=0.3
+        colorscale='plasma',   # choose a colorscale
+        opacity=0.5
     )
 )])
 
