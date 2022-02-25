@@ -5,7 +5,7 @@ Visialization of Hydrogen wave functions given by the equation
 
 
 Required packages
-*Numpy 
-*Pandas
-*Scipy
-*Plotly
+* Numpy 
+* Pandas
+* Scipy
+* Plotly
