@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 from scipy.special import sph_harm, genlaguerre
 
-import matplotlib.pyplot as plt
-import plotly.express as px
 import plotly.graph_objects as go
 
 
@@ -102,7 +100,7 @@ fig.show()
 
 ########################
 #                      #
-# n = 4, m = 0, l = 2, #  
+# n = 4, m = 0, l = 1, #  
 #                      #
 ########################
 
@@ -142,7 +140,7 @@ fig.show()
 
 ########################
 #                      #
-# n = 4, m = 0, l = 2, #  
+# n = 4, m = 2, l = 3, #  
 #                      #
 ########################
 
@@ -182,14 +180,14 @@ fig.show()
 
 ########################
 #                      #
-# n = 4, m = 0, l = 2, #  
+# n = 4, m = 2, l = 2, #  
 #                      #
 ########################
 
 #Number of data points
 Ndata = 500000
 #Generate data
-data = np.random.uniform(low=-30, high=30, size=(Ndata,3)),
+data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -222,7 +220,7 @@ fig.show()
 
 ########################
 #                      #
-# n = 4, m = 0, l = 2, #  
+# n = 3, m = 0, l = 1, #  
 #                      #
 ########################
 
