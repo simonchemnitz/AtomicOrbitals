@@ -68,11 +68,27 @@ def vizData(df, markersize = 2, opacity = 0.5):
         colorscale='plasma',   # choose a colorscale
         opacity=opacity
     )
-)])
+    )])
 
     # tight layout
     fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
     fig.show()
+
+def generateData(nData, low, high):
+    #Generate data
+    data = np.random.uniform(low=low, high=high, size=(nData,3))
+    #Add spherical coordinates
+    data = appendSpherical_np(data)
+    #Convert to Pandas DataFrame
+    df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+    return df
+
+
+
+
+
+
+
 
 ########################
 #                      #
@@ -80,16 +96,21 @@ def vizData(df, markersize = 2, opacity = 0.5):
 #                      #
 ########################
 
-#Number of data points
+#Variables
+# Number of datapoints
 Ndata = 200000
+# Range of datapoints
+low = -35
+high = 35
+# Quantum values
+n = 4
+m = 0
+l = 2
 #Generate data
-data = np.random.uniform(low=-35, high=35, size=(Ndata,3))
-#Add spherical coordinates
-data = appendSpherical_np(data)
-#Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+df = generateData(nData = Ndata, low = low, high = high)
+
 #Calculate Electron density
-df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 2, 
+df = df.assign(wav = lambda x: hwave(n = n, m = m, l = l, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
 #Subset data
 subdf = df.copy()
@@ -104,14 +125,19 @@ vizData(subdf)
 #                      #
 ########################
 
-#Number of data points
+#Variables
+# Number of datapoints
 Ndata = 550000
+# Range of datapoints
+low = -50
+high = 50
+# Quantum values
+n = 4
+m = 0
+l = 1
 #Generate data
-data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
-#Add spherical coordinates
-data = appendSpherical_np(data)
-#Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+df = generateData(nData = Ndata, low = -50, high = 50)
+
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 1, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
@@ -128,14 +154,20 @@ vizData(subdf)
 #                      #
 ########################
 
-#Number of data points
+#Variables
+# Number of datapoints
 Ndata = 500000
+# Range of datapoints
+low = -30
+high = 30
+# Quantum values
+n = 4
+m = 2
+l = 3
 #Generate data
-data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
-#Add spherical coordinates
-data = appendSpherical_np(data)
-#Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+df = generateData(nData = Ndata, low = low, high = high)
+
+
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 3, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
@@ -152,14 +184,20 @@ vizData(subdf)
 #                      #
 ########################
 
-#Number of data points
+#Variables
+# Number of datapoints
 Ndata = 500000
+# Range of datapoints
+low = -35
+high = 35
+# Quantum values
+n = 4
+m = 2
+l = 2
 #Generate data
-data = np.random.uniform(low=-35, high=35, size=(Ndata,3))
-#Add spherical coordinates
-data = appendSpherical_np(data)
-#Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+df = generateData(nData = Ndata, low = low, high = high)
+
+
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 2, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
@@ -176,14 +214,20 @@ vizData(subdf)
 #                      #
 ########################
 
-#Number of data points
+#Variables
+# Number of datapoints
 Ndata = 550000
+# Range of datapoints
+low = -50
+high = 50
+# Quantum values
+n = 5
+m = 1
+l = 3
+
 #Generate data
-data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
-#Add spherical coordinates
-data = appendSpherical_np(data)
-#Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+df = generateData(nData = Ndata, low = low, high = high)
+
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 5, m = 1, l = 3, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
@@ -193,3 +237,6 @@ subdf = subdf.loc[subdf["wav"].abs()>0.008]
 
 #Plot data
 vizData(subdf)
+
+
+
