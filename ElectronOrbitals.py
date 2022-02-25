@@ -116,13 +116,14 @@ data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
 data = appendSpherical_np(data)
 #Convert to pandas DataFrame
 df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+#Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 1, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
-#Copy of data
-subdf = df.copy()
 #Subset Data
+subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.003]
 
+#Plot Data
 fig = go.Figure(data=[go.Scatter3d(
     x=subdf["x"],
     y=subdf["y"],
