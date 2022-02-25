@@ -197,10 +197,9 @@ df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
 #Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 4, m = 2, l = 2, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
-
+#Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.0001]
-
 
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
@@ -229,16 +228,18 @@ fig.show()
 
 #Number of data points
 Ndata = 500000
-#generate data
+#Generate data
 data = np.random.uniform(low=-20, high=20, size=(Ndata,3))
+#Add spherical coordinates
 data = appendSpherical_np(data)
+#Convert to Pandas DataFrame
 df = pd.DataFrame(data, columns = ["x", "y", "z", "r", "theta", "phi"])
+#Calculate Electron density
 df = df.assign(wav = lambda x: hwave(n = 3, m = 0, l = 1, 
                                      r = x["r"], theta = x["theta"], phi=x["phi"])  )
-
+#Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.005]
-
 
 #Plot data
 fig = go.Figure(data=[go.Scatter3d(
