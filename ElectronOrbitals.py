@@ -56,7 +56,23 @@ def appendSpherical_np(xyz):
     ptsnew[:,5] = np.arctan2(xyz[:,1], xyz[:,0])
     return ptsnew
 
+def vizData(df, markersize = 2, opacity = 0.5):
+    fig = go.Figure(data=[go.Scatter3d(
+    x=df["x"],
+    y=df["y"],
+    z=df["z"],
+    mode='markers',
+    marker=dict(
+        size=markersize,
+        color=df["wav"],                # set color to an array/list of desired values
+        colorscale='plasma',   # choose a colorscale
+        opacity=opacity
+    )
+)])
 
+    # tight layout
+    fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
+    fig.show()
 
 ########################
 #                      #
@@ -65,9 +81,9 @@ def appendSpherical_np(xyz):
 ########################
 
 #Number of data points
-Ndata = 500000
+Ndata = 200000
 #Generate data
-data = np.random.uniform(low=-30, high=30, size=(Ndata,3))
+data = np.random.uniform(low=-35, high=35, size=(Ndata,3))
 #Add spherical coordinates
 data = appendSpherical_np(data)
 #Convert to Pandas DataFrame
@@ -80,23 +96,7 @@ subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
 
 #Plot data
-fig = go.Figure(data=[go.Scatter3d(
-    x=subdf["x"],
-    y=subdf["y"],
-    z=subdf["z"],
-    mode='markers',
-    marker=dict(
-        size=2,
-        color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='plasma',   # choose a colorscale
-        opacity=0.3
-    )
-)])
-
-# tight layout
-fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-fig.show()
-
+vizData(subdf)
 
 ########################
 #                      #
@@ -105,7 +105,7 @@ fig.show()
 ########################
 
 #Number of data points
-Ndata = 500000
+Ndata = 550000
 #Generate data
 data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
 #Add spherical coordinates
@@ -118,24 +118,9 @@ df = df.assign(wav = lambda x: hwave(n = 4, m = 0, l = 1,
 #Subset data
 subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.02]
+
 #Plot data
-fig = go.Figure(data=[go.Scatter3d(
-    x=subdf["x"],
-    y=subdf["y"],
-    z=subdf["z"],
-    mode='markers',
-    marker=dict(
-        size=2,
-        color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='plasma',   # choose a colorscale
-        opacity=0.5
-    )
-)])
-
-# tight layout
-fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-fig.show()
-
+vizData(subdf)
 
 ########################
 #                      #
@@ -159,23 +144,7 @@ subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
 
 #Plot data
-fig = go.Figure(data=[go.Scatter3d(
-    x=subdf["x"],
-    y=subdf["y"],
-    z=subdf["z"],
-    mode='markers',
-    marker=dict(
-        size=2,
-        color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='plasma',   # choose a colorscale
-        opacity=0.5
-    )
-)])
-
-# tight layout
-fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-fig.show()
-
+vizData(subdf)
 
 ########################
 #                      #
@@ -199,23 +168,7 @@ subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.01]
 
 #Plot data
-fig = go.Figure(data=[go.Scatter3d(
-    x=subdf["x"],
-    y=subdf["y"],
-    z=subdf["z"],
-    mode='markers',
-    marker=dict(
-        size=2,
-        color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='plasma',   # choose a colorscale
-        opacity=0.5
-    )
-)])
-
-# tight layout
-fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-fig.show()
-
+vizData(subdf)
 
 ########################
 #                      #
@@ -224,7 +177,7 @@ fig.show()
 ########################
 
 #Number of data points
-Ndata = 500000
+Ndata = 550000
 #Generate data
 data = np.random.uniform(low=-50, high=50, size=(Ndata,3))
 #Add spherical coordinates
@@ -239,19 +192,4 @@ subdf = df.copy()
 subdf = subdf.loc[subdf["wav"].abs()>0.008]
 
 #Plot data
-fig = go.Figure(data=[go.Scatter3d(
-    x=subdf["x"],
-    y=subdf["y"],
-    z=subdf["z"],
-    mode='markers',
-    marker=dict(
-        size=2,
-        color=subdf["wav"],                # set color to an array/list of desired values
-        colorscale='plasma',   # choose a colorscale
-        opacity=0.5
-    )
-)])
-
-# tight layout
-fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-fig.show()
+vizData(subdf)
