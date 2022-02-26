@@ -6,10 +6,9 @@ Visualization of Hydrogen wave functions given by the equation
 
 This can lead to some interesting visualizations as seen below, however best viewed in 3D.
 
-[[https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex1.png|width=100px]]
-[[https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex2.png|width=100px]]
-[[https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex3.png|width=100px]]
 
+
+<img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex1.png" width="600">
 
 Simply run the file  to produce interactive plotly 3D figures.
 Required packages
