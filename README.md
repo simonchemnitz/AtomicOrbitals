@@ -8,7 +8,9 @@ This can lead to some interesting visualizations as seen below, however best vie
 
 
 
-<img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex1.png" width="600">
+<img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex1.png" width="400">
+<img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex2.png" width="400">
+<img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex3.png" width="400">
 
 Simply run the file  to produce interactive plotly 3D figures.
 Required packages
