@@ -12,9 +12,22 @@ This can lead to some interesting visualizations as seen below, however best vie
 <img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex2.png" width="400">
 <img src="https://github.com/simonchemnitz/AtomicOrbitals/blob/main/Examples/ex3.png" width="400">
 
-Simply run the file  to produce interactive plotly 3D figures.
-Required packages
-* Numpy 
-* Pandas
-* Scipy
-* Plotly
+To download packages
+```
+pip install pipenv
+
+pipenv install
+```
+```
+plot_kwargs = {
+        "opacity": 1,
+        "colorscale": "plasma",
+        "marker_size": 2,
+        "theme": "plotly_dark",
+    }
+
+wave = Hydrogen_Wave()
+wave.set_quantum_number(n=4, l=2, m=2)
+wave.generate_data(n_points=600000, low=-35, high=35)
+wave.vizualise_wave(threshold=0.01, plot_kwargs=plot_kwargs)
+```
